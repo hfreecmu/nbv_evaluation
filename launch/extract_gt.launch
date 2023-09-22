@@ -1,0 +1,27 @@
+<!-- xml version="1.0"? -->
+<launch>
+
+<arg name="world_frame" default="world"/>
+<arg name="robot_frame" default="robot_world"/>
+<arg name="resolution" default="0.001"/>
+<arg name="fruitlet_mesh_path" default="/root/.gazebo/models/gazebo_meshes/cluster/fruitlet_straight_stem_purple.dae"/>
+<arg name="fruitlet_mesh_name" default="Sphere-mesh"/>
+<!-- <arg name="fruitlet_link_identifier" default="fruitlet_cluster_target"/> -->
+<arg name="fruitlet_link_identifier" default="fruitlet_cluster::fruitlet"/>
+<arg name="output_dir" default="/home/debug"/>
+
+<node pkg ="evaluation" type="parse_world.py" name="world_parser" output="screen">
+</node>
+
+<!-- Currently setup for gazebo calibration -->
+<node pkg="evaluation" type="gt_extractor" name="gt_extractor_node" output="screen">
+    <param name="world_frame" type="string" value="$(arg world_frame)" />
+    <param name="robot_frame" type="string" value="$(arg robot_frame)" />
+    <param name="resolution" type="string" value="$(arg resolution)" />
+    <param name="fruitlet_mesh_path" type="string" value="$(arg fruitlet_mesh_path)" />
+    <param name="fruitlet_mesh_name" type="string" value="$(arg fruitlet_mesh_name)" />
+    <param name="fruitlet_link_identifier" type="string" value="$(arg fruitlet_link_identifier)" />
+    <param name="output_dir" type="string" value="$(arg output_dir)" />
+</node>
+
+</launch>
